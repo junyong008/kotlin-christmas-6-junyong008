@@ -33,6 +33,16 @@ class DecemberDayTest {
         assertEquals(DecemberDay(30), result)
     }
 
+    @Test
+    fun `문자열로 객체 생성 - 빈 값 입력`() {
+        // given
+        val input = ""
+        // when & then
+        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy { DecemberDay.fromString(input) }
+            .withMessage("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.")
+    }
+
     @ParameterizedTest
     @ValueSource(strings = ["", "abcd", "2147483648", "-2147483649"])
     fun `문자열로 객체 생성 - Int 범위 초과 입력`(input: String) {
