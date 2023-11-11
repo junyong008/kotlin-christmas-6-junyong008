@@ -21,7 +21,7 @@ class Orders private constructor(private val orders: EnumMap<Menu, MenuCount>) {
         orders.entries.joinToString("\n") { (menu, menuCount) -> "$menu $menuCount" }
 
     companion object {
-        fun createOrdersFromString(input: String): Orders {
+        fun fromString(input: String): Orders {
             val inputOrders = input.split(",")
             val outputOrders = EnumMap<Menu, MenuCount>(Menu::class.java)
 

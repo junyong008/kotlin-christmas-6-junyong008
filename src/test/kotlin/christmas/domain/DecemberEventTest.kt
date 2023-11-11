@@ -11,7 +11,7 @@ class DecemberEventTest {
     fun `방문 날짜와 주문 정보를 기반으로 이벤트 혜택 계산`() {
         // given
         val reservationDay = DecemberDay(3)
-        val reservationOrders = Orders.createOrdersFromString("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1")
+        val reservationOrders = Orders.fromString("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1")
         // when
         val result = decemberEvent.getBenefits(reservationDay, reservationOrders)
         // then
