@@ -6,5 +6,6 @@ class Benefit(
     private val amount: Money,
 ) {
     fun getAmount() = amount
+    fun isDiscountType() = (type == BenefitType.DISCOUNT)
     override fun toString(): String = "$name $type: -$amount"
 }
