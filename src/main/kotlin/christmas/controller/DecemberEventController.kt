@@ -16,6 +16,7 @@ class DecemberEventController(
         outputView.outputGreetingMessage()
         val reservationDay = inputReservationDay()
         val reservationOrders = inputReservationOrders()
+        outputView.outputBenefitPreviewTitle(reservationDay.toString())
     }
 
     private fun inputReservationDay(): DecemberDay =
