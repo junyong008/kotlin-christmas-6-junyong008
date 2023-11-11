@@ -21,7 +21,16 @@ class DecemberEventTest {
             특별 할인: -1,000원
             증정 이벤트: -25,000원
         """.trimIndent()
-        val resultValue = result.toString()
-        assertEquals(expectedValue, resultValue)
+        assertEquals(expectedValue, result.toString())
+    }
+
+    @Test
+    fun `총주문 금액을 기반으로 증정 메뉴 얻기`() {
+        // given
+        val totalOrderAmount = Money(120000)
+        // when
+        val result = decemberEvent.getFreeGift(totalOrderAmount)
+        // then
+        assertEquals("샴페인 1개", result.toString())
     }
 }
