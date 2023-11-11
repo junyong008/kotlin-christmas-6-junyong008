@@ -1,6 +1,11 @@
 package christmas.domain
 
-class MenuCount(private val count: Int) {
+import christmas.exception.OrdersException
+
+data class MenuCount(private val count: Int) {
+    init {
+        require(count >= 1) { OrdersException.INVALID.message }
+    }
 
     fun getCount() = count
 

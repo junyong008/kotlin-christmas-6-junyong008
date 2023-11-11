@@ -2,6 +2,7 @@ package christmas.controller
 
 import christmas.domain.DecemberDay
 import christmas.domain.DecemberEvent
+import christmas.domain.Orders
 import christmas.service.DecemberEventService
 import christmas.view.InputView
 import christmas.view.OutputView
@@ -14,12 +15,19 @@ class DecemberEventController(
     fun run() {
         outputView.outputGreetingMessage()
         val reservationDay = inputReservationDay()
+        val reservationOrders = inputReservationOrders()
     }
 
     private fun inputReservationDay(): DecemberDay =
         retryOnException {
             val input = inputView.inputReservationDay()
             decemberEventService.getReservationDay(input)
+        }
+
+    private fun inputReservationOrders(): Orders =
+        retryOnException {
+            val input = inputView.inputReservationOrders()
+            decemberEventService.getReservationOrders(input)
         }
 
     private fun <Return> retryOnException(operation: () -> Return): Return {
