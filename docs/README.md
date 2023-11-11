@@ -12,29 +12,58 @@
 2. **12월 중 식당 예상 방문 날짜 입력 받기**
     * [Controller] View에 방문 날짜 입력 요청
     * [InputView] 사용자로부터 방문 날짜 입력
-    * [Service] 입력받은 문자열 날짜로 도메인 생성
+    * [Domain] 입력받은 문자열 날짜로 도메인 생성
     * [Controller] 위 과정 중 예외 발생시 재입력 요청
 
 3. **주문할 메뉴와 개수 입력 받기**
    * [Controller] View에 주문할 메뉴 및 개수 입력 요청
    * [InputView] 사용자로부터 주문할 메뉴 및 개수 입력
-   * [Service] 입력받은 문자열로 주문 목록 도메인 생성
+   * [Domain] 입력받은 문자열로 주문 목록 도메인 생성
    * [Controller] 위 과정 중 예외 발생시 재입력 요청
 
 4. **혜택 미리보기 제목 출력**
-   * [Controller] View에 방문 날짜를 문자열로 전달 및 제목 출력 요청
+   * [Controller] 방문 날짜를 문자열로 변환하여 View에 전달 및 제목 출력 요청
    * [OutputView] 혜택 미리보기 제목 출력
 
 5. **주문 메뉴 출력**
-   * [Controller] View에 주문 메뉴를 문자열로 전달
-   * [OutputView] 주문 메뉴 출력
+   * [Controller] 주문 메뉴를 문자열로 변환하여 View에 출력 요청
+   * [OutputView] 입력받은 문자열 출력
 
 6. **할인 전 총주문 금액 출력**
+   * [Domain] 할인 전 총주문 금액 계산
+   * [Controller] 문자열로 변환하여 View에 출력 요청
+   * [Domain] 문자열 변환 override
+   * [OutputView] 입력받은 문자열 출력
+
 7. **증정 이벤트 해당 여부 출력**
+   * [Domain] 증정 이벤트 해당 여부 계산 및 상품 반환
+   * [Controller] 상품이 있으면 문자열로 변환, 없으면 "없음" View에 출력 요청
+   * [Domain] 상품이 있으면 문자열 변환 override
+   * [OutputView] 입력받은 문자열 출력
+
 8. **혜택 내역 출력**
+   * [Domain] 예약 날짜 및 주문을 받아 혜택 내역 반환
+   * [Controller] 문자열로 변환하여 View에 출력 요청
+   * [Domain] 문자열 변환 override
+   * [OutputView] 입력받은 문자열 출력
+
 9. **총혜택 금액 출력**
+   * [Domain] 총혜택 금액 반환
+   * [Controller] null이라면 0으로 변경
+   * [Controller] 문자열로 변환하여 View에 출력 요청
+   * [Domain] 문자열 변환 override
+   * [OutputView] 입력받은 문자열 출력
+
 10. **할인 후 예상 결제 금액 출력**
+    * [Domain] 혜택 중 할인 금액 반환
+    * [Controller] 총주문 금액에서 할인 금액 차감
+    * [Controller] 문자열로 변환하여 View에 출력 요청
+    * [OutputView] 입력받은 문자열 출력
+
 11. **12월 이벤트 배지 출력**
+    * [Domain] 총혜택 금액을 입력받아 해당하는 배지 반환
+    * [Controller] 문자열로 변환하여 View에 출력 요청
+    * [OutputView] 입력받은 문자열 출력
 
 ## ⌨️ 입력
 - **12월 중 식당 예상 방문 날짜**
