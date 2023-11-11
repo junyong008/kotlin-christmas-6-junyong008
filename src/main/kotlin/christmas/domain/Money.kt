@@ -2,6 +2,7 @@ package christmas.domain
 
 data class Money(private val amount: Int) {
 
+    fun toNegative() = Money(-amount)
     fun isGreaterOrEqual(other: Money): Boolean = amount >= other.amount
     fun plus(other: Money): Money = Money(amount + other.amount)
     fun multiplyBy(input: Int): Money = Money(amount * input)

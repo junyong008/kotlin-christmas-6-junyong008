@@ -53,7 +53,7 @@ class DecemberEvent {
         val freeGift = getFreeGift(totalOrderAmount)?: return null
 
         val benefitAmount = freeGift.getTotalOrderAmount()
-        return Benefit(BENEFIT_FREE_GIFT_TYPE, BENEFIT_FREE_GIFT_TITLE, benefitAmount)
+        return Benefit(BENEFIT_FREE_GIFT_TYPE, BENEFIT_FREE_GIFT_TITLE, benefitAmount.toNegative())
     }
 
     companion object {
@@ -61,26 +61,26 @@ class DecemberEvent {
 
         private const val BENEFIT_CHRISTMAS_D_DAY_TITLE = "크리스마스 디데이"
         private val BENEFIT_CHRISTMAS_D_DAY_TYPE = BenefitType.DISCOUNT
-        private val DISCOUNT_CHRISTMAS_START_D_DAY = Money(1000)
-        private val DISCOUNT_CHRISTMAS_PER_D_DAY = Money(100)
+        private val DISCOUNT_CHRISTMAS_START_D_DAY = Money(-1000)
+        private val DISCOUNT_CHRISTMAS_PER_D_DAY = Money(-100)
 
         private const val BENEFIT_WEEKDAY_TITLE = "평일"
         private val BENEFIT_WEEKDAY_TYPE = BenefitType.DISCOUNT
         private val WEEKDAY_DISCOUNT_CATEGORY = MenuCategory.DESSERT
-        private val DISCOUNT_WEEKDAY_PER_MENU = Money(2023)
+        private val DISCOUNT_WEEKDAY_PER_MENU = Money(-2023)
 
         private const val BENEFIT_WEEKEND_TITLE = "주말"
         private val BENEFIT_WEEKEND_TYPE = BenefitType.DISCOUNT
         private val WEEKEND_DISCOUNT_CATEGORY = MenuCategory.MAIN
-        private val DISCOUNT_WEEKEND_PER_MENU = Money(2023)
+        private val DISCOUNT_WEEKEND_PER_MENU = Money(-2023)
 
         private const val BENEFIT_SPECIAL_TITLE = "특별"
         private val BENEFIT_SPECIAL_TYPE = BenefitType.DISCOUNT
-        private val DISCOUNT_SPECIAL = Money(1000)
+        private val DISCOUNT_SPECIAL = Money(-1000)
 
         private const val BENEFIT_FREE_GIFT_TITLE = "증정"
         private val BENEFIT_FREE_GIFT_TYPE = BenefitType.EVENT
         private const val FREE_GIFT = "샴페인-1"
-        private val MIN_ORDER_AMOUNT_FOR_FREE_GIFT = Money(120000)
+        private val MIN_ORDER_AMOUNT_FOR_FREE_GIFT = Money(-120000)
     }
 }

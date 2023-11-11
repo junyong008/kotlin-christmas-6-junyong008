@@ -7,5 +7,5 @@ class Benefit(
 ) {
     fun getAmount() = amount
     fun isDiscountType() = (type == BenefitType.DISCOUNT)
-    override fun toString(): String = "$name $type: -$amount"
+    override fun toString(): String = "$name $type: $amount"
 }

@@ -2,6 +2,7 @@ package christmas.controller
 
 import christmas.domain.DecemberDay
 import christmas.domain.DecemberEvent
+import christmas.domain.Money
 import christmas.domain.Orders
 import christmas.view.InputView
 import christmas.view.OutputView
@@ -24,6 +25,8 @@ class DecemberEventController(
         if (freeGift != null) outputView.outputFreeGift(freeGift.toString()) else outputView.outputFreeGift("없음")
         val benefits = decemberEvent.getBenefits(reservationDay, reservationOrders)
         if (benefits != null) outputView.outputBenefits(benefits.toString()) else outputView.outputBenefits("없음")
+        val totalBenefitAmount = benefits?.getTotalBenefitAmount()?: Money(0)
+        outputView.outputTotalBenefitAmount(totalBenefitAmount.toString())
     }
 
     private fun inputReservationDay(): DecemberDay =
