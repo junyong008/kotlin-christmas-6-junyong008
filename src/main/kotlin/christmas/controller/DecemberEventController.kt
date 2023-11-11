@@ -1,9 +1,6 @@
 package christmas.controller
 
-import christmas.domain.DecemberDay
-import christmas.domain.DecemberEvent
-import christmas.domain.Money
-import christmas.domain.Orders
+import christmas.domain.*
 import christmas.view.InputView
 import christmas.view.OutputView
 
@@ -30,6 +27,8 @@ class DecemberEventController(
         val discountAmount = benefits?.getTotalDiscountAmount()?: Money(0)
         val discountedPaymentAmount = totalOrderAmountBeforeDiscount.plus(discountAmount)
         outputView.outputDiscountedPaymentAmount(discountedPaymentAmount.toString())
+        val eventBadge = EventBadge.getBadge(totalBenefitAmount)
+        outputView.outputEventBadge(eventBadge.toString())
     }
 
     private fun inputReservationDay(): DecemberDay =

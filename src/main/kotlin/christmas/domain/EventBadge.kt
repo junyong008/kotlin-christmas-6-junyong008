@@ -9,8 +9,10 @@ enum class EventBadge(
     STAR("별", Money(5000)),
     NOTHING("없음", Money(0));
 
+    override fun toString(): String = badgeName
+
     companion object {
         fun getBadge(totalBenefitAmount: Money): EventBadge =
-            entries.firstOrNull { totalBenefitAmount.isGreaterOrEqual(it.minAmount) }?: NOTHING
+            entries.firstOrNull { totalBenefitAmount.toNegative().isGreaterOrEqual(it.minAmount) }?: NOTHING
     }
 }
