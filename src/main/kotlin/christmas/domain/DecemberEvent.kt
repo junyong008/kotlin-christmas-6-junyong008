@@ -5,7 +5,7 @@ import java.util.*
 class DecemberEvent {
 
     fun getFreeGift(totalOrderAmount: Money): Orders? =
-        if (totalOrderAmount.isGreaterOrEqual(ORDER_AMOUNT_TO_FREE_GIFT)) Orders.createOrdersFromString(FREE_GIFT) else null
+        if (totalOrderAmount.isGreaterOrEqual(MIN_ORDER_AMOUNT_FOR_FREE_GIFT)) Orders.createOrdersFromString(FREE_GIFT) else null
 
     fun getBenefits(reservationDay: DecemberDay, reservationOrders: Orders): Benefits? {
         val totalOrderAmount = reservationOrders.getTotalOrderAmount()
@@ -81,6 +81,6 @@ class DecemberEvent {
         private const val BENEFIT_FREE_GIFT_TITLE = "증정"
         private val BENEFIT_FREE_GIFT_TYPE = BenefitType.EVENT
         private const val FREE_GIFT = "샴페인-1"
-        private val ORDER_AMOUNT_TO_FREE_GIFT = Money(120000)
+        private val MIN_ORDER_AMOUNT_FOR_FREE_GIFT = Money(120000)
     }
 }
