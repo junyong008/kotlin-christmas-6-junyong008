@@ -2,7 +2,7 @@ package christmas.domain
 
 import christmas.exception.DecemberDayException
 
-class DecemberDay(private val day: Int) {
+data class DecemberDay(private val day: Int) {
     init {
         require(day in DAY_START..DAY_END) { DecemberDayException.INVALID.message }
     }
