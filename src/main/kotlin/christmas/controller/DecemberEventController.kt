@@ -22,6 +22,8 @@ class DecemberEventController(
         outputView.outputTotalOrderAmountBeforeDiscount(totalOrderAmountBeforeDiscount.toString())
         val freeGift = decemberEvent.getFreeGift(totalOrderAmountBeforeDiscount)
         if (freeGift != null) outputView.outputFreeGift(freeGift.toString()) else outputView.outputFreeGift("없음")
+        val benefits = decemberEvent.getBenefits(reservationDay, reservationOrders)
+        if (benefits != null) outputView.outputBenefits(benefits.toString()) else outputView.outputBenefits("없음")
     }
 
     private fun inputReservationDay(): DecemberDay =
