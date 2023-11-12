@@ -2,6 +2,7 @@ package christmas.controller
 
 import christmas.domain.*
 import christmas.domain.benefit.Benefits
+import christmas.domain.order.FreeGift
 import christmas.domain.order.Orders
 import christmas.view.InputView
 import christmas.view.OutputView
@@ -15,7 +16,7 @@ class DecemberEventController(
     private lateinit var reservationDay: DecemberDay
     private lateinit var reservationOrders: Orders
 
-    private var freeGift: Orders? = null
+    private var freeGift: FreeGift? = null
     private var benefits: Benefits? = null
     private var eventBadge = EventBadge.NOTHING
     private var totalOrderAmountBeforeDiscount = Money(0)

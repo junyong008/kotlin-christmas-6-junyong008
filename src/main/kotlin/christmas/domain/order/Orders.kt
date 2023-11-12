@@ -12,8 +12,9 @@ class Orders private constructor(private val orders: EnumMap<Menu, MenuCount>) {
             acc.plus(orderPrice)
         }
 
-    fun getMenuCountInCategory(category: MenuCategory): MenuCount {
+    fun getMenuCountInCategory(category: MenuCategory): MenuCount? {
         val filteredMenus = orders.filter { it.key.isCategorySame(category) }
+        if (filteredMenus.isEmpty()) return null
         val menuCount = filteredMenus.values.sumOf { it.getCount() }
         return MenuCount(menuCount)
     }
@@ -25,6 +26,7 @@ class Orders private constructor(private val orders: EnumMap<Menu, MenuCount>) {
 
         private const val DELIMITER_ORDERS = ","
         private const val DELIMITER_ORDER = "-"
+        private const val MAX_MENU_COUNT = 20
 
         fun fromString(input: String): Orders {
             val inputOrders = input.split(DELIMITER_ORDERS)
@@ -37,6 +39,8 @@ class Orders private constructor(private val orders: EnumMap<Menu, MenuCount>) {
 
                 outputOrders[menu] = MenuCount(count)
             }
+            checkMenuCount(outputOrders)
+            checkOnlyBeverage(outputOrders)
             return Orders(outputOrders)
         }
 
@@ -55,5 +59,16 @@ class Orders private constructor(private val orders: EnumMap<Menu, MenuCount>) {
 
         private fun checkDuplicatedMenu(menu: Menu, orders: EnumMap<Menu, MenuCount>) =
             require(!orders.containsKey(menu)) { OrdersException.INVALID.message }
+
+        private fun checkMenuCount(orders: EnumMap<Menu, MenuCount>) {
+            val menuCounts = orders.values
+            val totalMenuCount = menuCounts.sumOf { it.getCount() }
+            require(totalMenuCount <= MAX_MENU_COUNT) { OrdersException.EXCEED_MAX_MENU_COUNT.message }
+        }
+
+        private fun checkOnlyBeverage(orders: EnumMap<Menu, MenuCount>) {
+            val nonBeverageMenus = orders.filterNot { it.key.isCategorySame(MenuCategory.BEVERAGE) }
+            require(nonBeverageMenus.isNotEmpty()) { OrdersException.ONLY_BEVERAGE.message }
+        }
     }
 }
