@@ -44,6 +44,17 @@ class DecemberEventTest {
     }
 
     @Test
+    fun `방문 날짜와 주문 정보를 기반으로 이벤트 혜택 계산 - 혜택 없음`() {
+        // given
+        val reservationDay = DecemberDay(22)
+        val reservationOrders = Orders.fromString("아이스크림-1")
+        // when
+        val result = decemberEvent.getBenefits(reservationDay, reservationOrders)
+        // then
+        assertThat(result).isNull()
+    }
+
+    @Test
     fun `총주문 금액을 기반으로 증정 메뉴 얻기`() {
         // given
         val totalOrderAmount = Money(120000)
