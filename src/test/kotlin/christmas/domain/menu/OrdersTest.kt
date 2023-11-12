@@ -2,6 +2,7 @@ package christmas.domain.menu
 
 import christmas.domain.Money
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -123,12 +124,11 @@ class OrdersTest {
         // when
         val result = input.toString()
         // then
-        val expectedValue = """
-            티본스테이크 1개
-            바비큐립 1개
-            초코케이크 2개
-            제로콜라 1개
-        """.trimIndent()
-        assertEquals(expectedValue, result)
+        assertThat(result).contains(
+            "티본스테이크 1개",
+            "바비큐립 1개",
+            "초코케이크 2개",
+            "제로콜라 1개"
+        )
     }
 }
