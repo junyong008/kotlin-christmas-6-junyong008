@@ -16,7 +16,7 @@ class DecemberDayTest {
 
     @ParameterizedTest
     @ValueSource(ints = [-1, 32, 50])
-    fun `객체 생성 - 범위 초과`(input: Int) {
+    fun `객체 생성 - 범위 초과 예외 처리`(input: Int) {
         // when & then
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { DecemberDay(input) }
@@ -34,7 +34,7 @@ class DecemberDayTest {
     }
 
     @Test
-    fun `문자열로 객체 생성 - 빈 값 입력`() {
+    fun `문자열로 객체 생성 - 빈 값 입력 예외 처리`() {
         // given
         val input = ""
         // when & then
@@ -45,7 +45,7 @@ class DecemberDayTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["", "abcd", "2147483648", "-2147483649"])
-    fun `문자열로 객체 생성 - Int 범위 초과 입력`(input: String) {
+    fun `문자열로 객체 생성 - Int 범위 초과 입력 예외 처리`(input: String) {
         // when & then
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { DecemberDay.fromString(input) }
