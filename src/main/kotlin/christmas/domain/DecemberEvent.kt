@@ -3,7 +3,7 @@ package christmas.domain
 import christmas.domain.benefit.Benefit
 import christmas.domain.benefit.BenefitType
 import christmas.domain.benefit.Benefits
-import christmas.domain.order.*
+import christmas.domain.menu.*
 
 class DecemberEvent {
 

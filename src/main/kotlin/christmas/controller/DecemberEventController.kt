@@ -2,8 +2,8 @@ package christmas.controller
 
 import christmas.domain.*
 import christmas.domain.benefit.Benefits
-import christmas.domain.order.FreeGift
-import christmas.domain.order.Orders
+import christmas.domain.menu.FreeGift
+import christmas.domain.menu.Orders
 import christmas.view.InputView
 import christmas.view.OutputView
 

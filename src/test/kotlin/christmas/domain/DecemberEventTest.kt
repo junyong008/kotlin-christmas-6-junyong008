@@ -1,6 +1,6 @@
 package christmas.domain
 
-import christmas.domain.order.Orders
+import christmas.domain.menu.Orders
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

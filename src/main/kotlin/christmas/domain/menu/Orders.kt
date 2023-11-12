@@ -1,4 +1,4 @@
-package christmas.domain.order
+package christmas.domain.menu
 
 import christmas.domain.Money
 import christmas.exception.OrdersException
