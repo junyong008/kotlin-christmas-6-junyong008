@@ -85,6 +85,6 @@ class DecemberEvent {
         private const val BENEFIT_FREE_GIFT_TITLE = "증정"
         private val BENEFIT_FREE_GIFT_TYPE = BenefitType.EVENT
         private const val FREE_GIFT = "샴페인-1"
-        private val MIN_ORDER_AMOUNT_FOR_FREE_GIFT = Money(-120000)
+        private val MIN_ORDER_AMOUNT_FOR_FREE_GIFT = Money(120000)
     }
 }
