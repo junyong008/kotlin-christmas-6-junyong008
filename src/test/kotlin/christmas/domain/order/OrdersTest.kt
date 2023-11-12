@@ -15,7 +15,7 @@ class OrdersTest {
     }
 
     @Test
-    fun `문자열로 객체 생성 - 빈 값 입력`() {
+    fun `문자열로 객체 생성 - 빈 값 입력 예외 처리`() {
         // given
         val input = ""
         // when & then
@@ -25,7 +25,7 @@ class OrdersTest {
     }
 
     @Test
-    fun `문자열로 객체 생성 - 메뉴판에 없는 메뉴 입력`() {
+    fun `문자열로 객체 생성 - 메뉴판에 없는 메뉴 입력 예외 처리`() {
         // given
         val input = "제로콜라-1,탕후루-4"
         // when & then
@@ -35,7 +35,7 @@ class OrdersTest {
     }
 
     @Test
-    fun `문자열로 객체 생성 - 메뉴의 개수를 1미만으로 입력`() {
+    fun `문자열로 객체 생성 - 메뉴의 개수를 1미만으로 입력 예외 처리`() {
         // given
         val input = "레드와인-0,초코케이크-4"
         // when & then
@@ -45,7 +45,7 @@ class OrdersTest {
     }
 
     @Test
-    fun `문자열로 객체 생성 - 가이드 미준수 입력`() {
+    fun `문자열로 객체 생성 - 가이드 미준수 입력 예외 처리`() {
         // given
         val input = "초코케이크:1/제로콜라:3/레드와인 - 2"
         // when & then
@@ -55,13 +55,33 @@ class OrdersTest {
     }
 
     @Test
-    fun `문자열로 객체 생성 - 중복 메뉴 입력`() {
+    fun `문자열로 객체 생성 - 중복 메뉴 입력 예외 처리`() {
         // given
         val input = "레드와인-1,초코케이크-4,샴페인-2,레드와인-7"
         // when & then
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Orders.fromString(input) }
             .withMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.")
+    }
+
+    @Test
+    fun `문자열로 객체 생성 - 메뉴 개수 20개 초과 예외 처리`() {
+        // given
+        val input = "양송이수프-10,타파스-11"
+        // when & then
+        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy { Orders.fromString(input) }
+            .withMessage("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.")
+    }
+
+    @Test
+    fun `문자열로 객체 생성 - 음료만 주문시 예외 처리`() {
+        // given
+        val input = "제로콜라-4,샴페인-2"
+        // when & then
+        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy { Orders.fromString(input) }
+            .withMessage("[ERROR] 음료만 주문 시, 주문할 수 없습니다. 다시 입력해 주세요.")
     }
 
     @Test
@@ -75,7 +95,7 @@ class OrdersTest {
     }
 
     @Test
-    fun `특정 카테고리의 주문 개수 계산`() {
+    fun `특정 카테고리의 주문 개수 계산 - 정상 입력`() {
         // given
         val orders = Orders.fromString("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1")
         val category = MenuCategory.DESSERT
@@ -83,6 +103,17 @@ class OrdersTest {
         val result = orders.getMenuCountInCategory(category)
         // then
         assertEquals(MenuCount(2), result)
+    }
+
+    @Test
+    fun `특정 카테고리의 주문 개수 계산 - 해당하는 카테고리가 없는 경우 null 반환`() {
+        // given
+        val orders = Orders.fromString("티본스테이크-1,바비큐립-1,제로콜라-1")
+        val category = MenuCategory.DESSERT
+        // when
+        val result = orders.getMenuCountInCategory(category)
+        // then
+        assertEquals(null, result)
     }
 
     @Test
