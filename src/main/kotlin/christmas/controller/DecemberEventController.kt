@@ -9,26 +9,54 @@ class DecemberEventController(
     private val outputView: OutputView,
     private val decemberEvent: DecemberEvent,
 ) {
+
+    private lateinit var reservationDay: DecemberDay
+    private lateinit var reservationOrders: Orders
+
+    private var freeGift: Orders? = null
+    private var benefits: Benefits? = null
+    private var eventBadge = EventBadge.NOTHING
+    private var totalOrderAmountBeforeDiscount = Money(0)
+    private var totalBenefitAmount = Money(0)
+    private var discountedPaymentAmount = Money(0)
+
     fun run() {
         outputView.outputGreetingMessage()
-        val reservationDay = inputReservationDay()
-        val reservationOrders = inputReservationOrders()
-        outputView.outputBenefitPreviewTitle(reservationDay.toString())
-        outputView.outputOrders(reservationOrders.toString())
+        getReservation()
+        calculateBenefits()
+        outputBenefits()
+    }
 
-        val totalOrderAmountBeforeDiscount = reservationOrders.getTotalOrderAmount()
-        outputView.outputTotalOrderAmountBeforeDiscount(totalOrderAmountBeforeDiscount.toString())
-        val freeGift = decemberEvent.getFreeGift(totalOrderAmountBeforeDiscount)
-        if (freeGift != null) outputView.outputFreeGift(freeGift.toString()) else outputView.outputFreeGift("없음")
-        val benefits = decemberEvent.getBenefits(reservationDay, reservationOrders)
-        if (benefits != null) outputView.outputBenefits(benefits.toString()) else outputView.outputBenefits("없음")
-        val totalBenefitAmount = benefits?.getTotalBenefitAmount()?: Money(0)
-        outputView.outputTotalBenefitAmount(totalBenefitAmount.toString())
-        val discountAmount = benefits?.getTotalDiscountAmount()?: Money(0)
-        val discountedPaymentAmount = totalOrderAmountBeforeDiscount.plus(discountAmount)
-        outputView.outputDiscountedPaymentAmount(discountedPaymentAmount.toString())
-        val eventBadge = EventBadge.getBadge(totalBenefitAmount)
-        outputView.outputEventBadge(eventBadge.toString())
+    private fun getReservation() {
+        reservationDay = inputReservationDay()
+        reservationOrders = inputReservationOrders()
+    }
+
+    private fun calculateBenefits() {
+        totalOrderAmountBeforeDiscount = reservationOrders.getTotalOrderAmount()
+        discountedPaymentAmount = totalOrderAmountBeforeDiscount
+        freeGift = decemberEvent.getFreeGift(totalOrderAmountBeforeDiscount)
+
+        decemberEvent.getBenefits(reservationDay, reservationOrders)?.let {
+            benefits = it
+            totalBenefitAmount = it.getTotalBenefitAmount()
+            val discountAmount = it.getTotalDiscountAmount()
+            discountedPaymentAmount = totalOrderAmountBeforeDiscount.plus(discountAmount)
+            eventBadge = EventBadge.getBadge(totalBenefitAmount)
+        }
+    }
+
+    private fun outputBenefits() {
+        outputView.run {
+            outputBenefitPreviewTitle(reservationDay.toString())
+            outputOrders(reservationOrders.toString())
+            outputTotalOrderAmountBeforeDiscount(totalOrderAmountBeforeDiscount.toString())
+            outputFreeGift(freeGift?.toString() ?: "없음")
+            outputBenefits(benefits?.toString() ?: "없음")
+            outputTotalBenefitAmount(totalBenefitAmount.toString())
+            outputDiscountedPaymentAmount(discountedPaymentAmount.toString())
+            outputEventBadge(eventBadge.toString())
+        }
     }
 
     private fun inputReservationDay(): DecemberDay =
