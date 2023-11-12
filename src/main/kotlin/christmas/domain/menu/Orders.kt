@@ -6,11 +6,10 @@ import java.util.EnumMap
 
 class Orders private constructor(private val orders: EnumMap<Menu, MenuCount>) {
 
-    fun getTotalOrderAmount(): Money =
-        orders.entries.fold(Money(0)) { acc, (menu, menuCount) ->
-            val orderPrice = menu.multiplyPriceBy(menuCount.getCount())
-            acc.plus(orderPrice)
-        }
+    fun getTotalOrderAmount(): Money = orders.entries.fold(Money(0)) { acc, (menu, menuCount) ->
+        val orderPrice = menu.multiplyPriceBy(menuCount.getCount())
+        acc.plus(orderPrice)
+    }
 
     fun getMenuCountInCategory(category: MenuCategory): MenuCount? {
         val filteredMenus = orders.filter { it.key.isCategorySame(category) }

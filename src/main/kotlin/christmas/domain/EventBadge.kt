@@ -13,6 +13,6 @@ enum class EventBadge(
 
     companion object {
         fun getBadge(totalBenefitAmount: Money): EventBadge =
-            entries.firstOrNull { totalBenefitAmount.toNegative().isGreaterOrEqual(it.minAmount) }?: NOTHING
+            entries.firstOrNull { totalBenefitAmount.toNegative().isGreaterOrEqual(it.minAmount) } ?: NOTHING
     }
 }

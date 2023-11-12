@@ -62,17 +62,15 @@ class DecemberEventController(
         }
     }
 
-    private fun inputReservationDay(): DecemberDay =
-        retryOnException {
-            val input = inputView.inputReservationDay()
-            DecemberDay.fromString(input)
-        }
+    private fun inputReservationDay(): DecemberDay = retryOnException {
+        val input = inputView.inputReservationDay()
+        DecemberDay.fromString(input)
+    }
 
-    private fun inputReservationOrders(): Orders =
-        retryOnException {
-            val input = inputView.inputReservationOrders()
-            Orders.fromString(input)
-        }
+    private fun inputReservationOrders(): Orders = retryOnException {
+        val input = inputView.inputReservationOrders()
+        Orders.fromString(input)
+    }
 
     private fun <Return> retryOnException(operation: () -> Return): Return {
         return try {

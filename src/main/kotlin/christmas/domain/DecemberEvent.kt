@@ -35,26 +35,26 @@ class DecemberEvent {
     }
 
     private fun getWeekDayDiscountBenefit(reservationDay: DecemberDay, reservationOrders: Orders): Benefit? {
-        if(reservationDay.isWeekEnd()) return null
+        if (reservationDay.isWeekEnd()) return null
         val discountMenuCount = reservationOrders.getMenuCountInCategory(WEEKDAY_DISCOUNT_CATEGORY) ?: return null
         val discountAmount = DISCOUNT_WEEKDAY_PER_MENU.multiplyBy(discountMenuCount.getCount())
         return Benefit(BENEFIT_WEEKDAY_TYPE, BENEFIT_WEEKDAY_TITLE, discountAmount)
     }
 
     private fun getWeekEndDiscountBenefit(reservationDay: DecemberDay, reservationOrders: Orders): Benefit? {
-        if(!reservationDay.isWeekEnd()) return null
+        if (!reservationDay.isWeekEnd()) return null
         val discountMenuCount = reservationOrders.getMenuCountInCategory(WEEKEND_DISCOUNT_CATEGORY) ?: return null
         val discountAmount = DISCOUNT_WEEKEND_PER_MENU.multiplyBy(discountMenuCount.getCount())
         return Benefit(BENEFIT_WEEKEND_TYPE, BENEFIT_WEEKEND_TITLE, discountAmount)
     }
 
     private fun getSpecialDiscountBenefit(reservationDay: DecemberDay): Benefit? {
-        if(!reservationDay.isSpecialDay()) return null
+        if (!reservationDay.isSpecialDay()) return null
         return Benefit(BENEFIT_SPECIAL_TYPE, BENEFIT_SPECIAL_TITLE, DISCOUNT_SPECIAL)
     }
 
     private fun getFreeGiftBenefit(totalOrderAmount: Money): Benefit? {
-        val freeGift = getFreeGift(totalOrderAmount)?: return null
+        val freeGift = getFreeGift(totalOrderAmount) ?: return null
         val benefitAmount = freeGift.getTotalPrice()
         return Benefit(BENEFIT_FREE_GIFT_TYPE, BENEFIT_FREE_GIFT_TITLE, benefitAmount.toNegative())
     }
