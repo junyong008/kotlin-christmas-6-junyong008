@@ -20,7 +20,7 @@ class Orders private constructor(private val orders: EnumMap<Menu, MenuCount>) {
     }
 
     override fun toString(): String =
-        orders.entries.joinToString("\n") { (menu, menuCount) -> "$menu $menuCount" }
+        orders.entries.joinToString(System.lineSeparator()) { (menu, menuCount) -> "$menu $menuCount" }
 
     companion object {
 

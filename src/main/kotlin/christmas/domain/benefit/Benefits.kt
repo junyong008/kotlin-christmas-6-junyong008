@@ -12,5 +12,5 @@ class Benefits(private val benefits: List<Benefit>) {
             .filter { it.isDiscountType() }
             .fold(Money(0)) { acc, benefit -> acc.plus(benefit.getAmount()) }
 
-    override fun toString(): String = benefits.joinToString("\n")
+    override fun toString(): String = benefits.joinToString(System.lineSeparator())
 }
