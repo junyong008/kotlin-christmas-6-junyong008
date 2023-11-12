@@ -1,4 +1,6 @@
-package christmas.domain
+package christmas.domain.order
+
+import christmas.domain.Money
 
 enum class Menu(
     private val category: MenuCategory,

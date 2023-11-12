@@ -1,4 +1,4 @@
-package christmas.domain
+package christmas.domain.order
 
 enum class MenuCategory(private val categoryName: String) {
     APPETIZER("애피타이저"),

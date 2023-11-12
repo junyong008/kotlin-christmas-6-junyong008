@@ -1,5 +1,6 @@
-package christmas.domain
+package christmas.domain.order
 
+import christmas.domain.Money
 import christmas.exception.OrdersException
 import java.util.EnumMap
 

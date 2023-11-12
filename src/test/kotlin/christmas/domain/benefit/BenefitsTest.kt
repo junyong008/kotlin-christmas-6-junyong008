@@ -1,5 +1,6 @@
-package christmas.domain
+package christmas.domain.benefit
 
+import christmas.domain.Money
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

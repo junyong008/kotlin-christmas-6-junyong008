@@ -1,4 +1,4 @@
-package christmas.domain
+package christmas.domain.benefit
 
 enum class BenefitType(private val type: String) {
     DISCOUNT("할인"),

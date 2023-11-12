@@ -1,6 +1,10 @@
 package christmas.domain
 
-import java.util.*
+import christmas.domain.benefit.Benefit
+import christmas.domain.benefit.BenefitType
+import christmas.domain.benefit.Benefits
+import christmas.domain.order.MenuCategory
+import christmas.domain.order.Orders
 
 class DecemberEvent {
 
