@@ -2,7 +2,7 @@ package christmas.domain.menu
 
 import christmas.domain.Money
 
-class FreeGift(
+data class FreeGift(
     private val menu: Menu,
     private val menuCount: MenuCount
 ) {
