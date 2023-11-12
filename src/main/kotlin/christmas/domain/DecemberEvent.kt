@@ -23,7 +23,7 @@ class DecemberEvent {
             getSpecialDiscountBenefit(reservationDay),
             getFreeGiftBenefit(totalOrderAmount)
         )
-        return if (benefits.isNotEmpty()) Benefits(benefits) else null
+        return benefits.takeIf { it.isNotEmpty() }?.let { Benefits(it) }
     }
 
     private fun getChristmasDDayDiscountBenefit(reservationDay: DecemberDay): Benefit? {
