@@ -1,7 +1,112 @@
 # 기능 목록 - 크리스마스 프로모션
 
 ## 🎯 핵심 기능
-> 식당 방문 날짜와 주문 정보를 기반으로 이벤트 혜택을 계산
+> **식당 방문 날짜와 주문 정보를 기반으로 이벤트 혜택을 계산**
+
+## 🗂️ 프로젝트 구조
+
+<div align="center">
+<table>
+<thead>
+  <tr>
+    <th colspan="2">패키지</th>
+    <th>클래스</th>
+    <th>설명</th>
+  </tr>
+<tr><td colspan="4"></td></tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="12"><b>📁 domain</b></td>
+    <td rowspan="3"><b>benefit</b></td>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;Benefit</b></td>
+    <td>혜택 정보를 나타내는 클래스<br>혜택 유형(BenefitType), 혜택 이름(String), 금액(Money)로 구성</td>
+  </tr>
+  <tr>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;Benefits</b></td>
+    <td>여러 개의 혜택 정보를 관리하는 클래스<br>List&lt;Benefit&gt;로 구성</td>
+  </tr>
+  <tr>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/f652ba30-943c-427d-bd9f-796790c01a13" height="24px">&nbsp;&nbsp;BenefitType</b></td>
+    <td>혜택 유형을 정의하는 Enum 클래스</td>
+  </tr>
+    <td rowspan="5"><b>menu</b></td>
+   <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;Orders</b></td>
+    <td>주문 정보들을 나타내는 클래스<br>EnumMap&lt;Menu, MenuCount&gt;로 구성</td>
+  </tr>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;FreeGift</b></td>
+    <td>증정 상품을 나타내는 클래스<br>증정 메뉴(Menu)와 증정 개수(MenuCount)로 구성</td>
+  </tr>
+
+  <tr>
+     <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/f652ba30-943c-427d-bd9f-796790c01a13" height="24px">&nbsp;&nbsp;Menu</b></td>
+    <td>메뉴를 정의하는 Enum 클래스<br>메뉴 카테고리(MenuCategory), 이름(String), 가격(Money)으로 구성</td>
+  </tr>
+
+  <tr>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/f652ba30-943c-427d-bd9f-796790c01a13" height="24px">&nbsp;&nbsp;MenuCategory</b></td>
+    <td>메뉴 카테고리를 정의하는 Enum 클래스</td>
+  </tr>
+
+   <tr>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;MenuCount</b></td>
+    <td>메뉴 개수 원시값(Int)을 포장하는 클래스</td>
+  </tr>
+
+   <tr>
+    <td></td>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;DecemberDay</b></td>
+    <td>12월의 일(day)을 나타내는 클래스<br>평일/주말 여부 등 날짜 관련 메서드 제공</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;DecemberEvent</b></td>
+    <td>예약일과 예약 메뉴들을 바탕으로 혜택을 계산하는 클래스</td>
+  </tr>
+   <tr>
+    <td></td>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/f652ba30-943c-427d-bd9f-796790c01a13" height="24px">&nbsp;&nbsp;EventBadge</b></td>
+    <td>이벤트 배지를 정의하는 Enum 클래스</td>
+  </tr>
+   <tr>
+    <td></td>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;Money</b></td>
+    <td>프로그램 내 통용되는 화폐를 나타내는 클래스</td>
+  </tr>
+<tr><td colspan="4"></td></tr>
+  <tr>
+    <td colspan="2" rowspan="2"><b>⚠️ exception</b></td>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/f652ba30-943c-427d-bd9f-796790c01a13" height="24px">&nbsp;&nbsp;DecemberDayException</b></td>
+    <td>12월 날짜 관련 예외 메시지를 모아둔 Enum 클래스</td>
+  </tr>
+  <tr>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/f652ba30-943c-427d-bd9f-796790c01a13" height="24px">&nbsp;&nbsp;OrdersException</b></td>
+    <td>주문 정보 관련 예외 메시지를 모아둔 Enum 클래스</td>
+  </tr>
+<tr><td colspan="4"></td></tr>
+  <tr>
+    <td colspan="2" rowspan="2"><b>🖥️ view</b></td>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;InputView</b></td>
+    <td>사용자 입력을 담당하는 뷰 클래스</td>
+  </tr>
+  <tr>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;OutputView</b></td>
+    <td>출력을 담당하는 뷰 클래스</td>
+  </tr>
+  <tr><td colspan="4"></td></tr>
+  <tr>
+    <td colspan="2" rowspan="1"><b>🕹️ controller</b></td>
+    <td><b><img align="center" src="https://github.com/woowacourse-precourse/kotlin-lotto-6/assets/69251013/11d70dca-1478-45e0-857e-cc4571cffc9b" height="24px">&nbsp;&nbsp;DecemberEventController</b></td>
+    <td>프로그램의 흐름을 관리하고 로직을 조율하는 클래스</td>
+  </tr>
+<tr><td colspan="4"></td></tr>
+  <tr>
+    <td colspan="3"><b>🚀 Application</b></td>
+    <td>View와 핵심 Domain객체를 생성하여 Controller에 주입 및 실행</td>
+  </tr>
+</tbody>
+</table>
+</div>
 
 ## 📋 절차
 
@@ -82,6 +187,8 @@
 
 ⚠️ 예외 처리(Domain - Orders) :
 - (문자열-숫자,문자열-숫자...) 형식 외 입력
+- 메뉴의 카테고리가 음료밖에 없는 경우
+- 메뉴의 총 개수가 20개를 초과
 - 해당하는 메뉴가 없는 경우
 - 중복된 메뉴 존재
 
